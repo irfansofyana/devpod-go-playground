@@ -8,11 +8,71 @@
     "customizations": {
         "vscode": {
             "extensions": [
+                // Core development
                 "golang.go",
+                "github.copilot",
+                "github.copilot-chat",
+                "ms-azuretools.vscode-docker",
+                
+                // Theme and UI
+                "pkief.material-icon-theme",
+                "jdinhlife.gruvbox",
+                
+                // Git tools
                 "eamodio.gitlens",
-                "GitHub.copilot",
-                "ms-azuretools.vscode-docker"
-            ]
+                
+                // Utilities
+                "editorconfig.editorconfig",
+                "redhat.vscode-yaml",
+                "mikestead.dotenv"
+            ],
+            "settings": {
+                // Editor settings
+                "editor.formatOnSave": true,
+                "editor.tabSize": 2,
+                "editor.insertSpaces": true,
+                "editor.fontFamily": "Fira Code",
+                "editor.fontLigatures": true,
+                "editor.inlineSuggest.enabled": true,
+                "editor.bracketPairColorization.enabled": true,
+                "editor.guides.bracketPairs": true,
+                "editor.codeActionsOnSave": {
+                    "source.fixAll": true,
+                    "source.organizeImports": true
+                },
+
+                // Files settings
+                "files.trimTrailingWhitespace": true,
+                "files.insertFinalNewline": true,
+                "files.eol": "\n",
+
+                // Go settings
+                "go.useLanguageServer": true,
+                "go.toolsManagement.autoUpdate": true,
+                "go.formatTool": "goimports",
+                "go.lintTool": "golangci-lint",
+                "go.lintFlags": ["--fast"],
+                "[go]": {
+                    "editor.tabSize": 4,
+                    "editor.insertSpaces": false,
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "golang.go"
+                },
+
+                // Terminal settings
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.fontFamily": "MesloLGS NF",
+                
+                // Git settings
+                "git.autofetch": true,
+                "git.enableSmartCommit": true,
+                "git.enableCommitSigning": true,
+                
+                // Workbench settings
+                "workbench.iconTheme": "material-icon-theme",
+                "workbench.colorTheme": "Gruvbox Dark Medium",
+                "workbench.editor.enablePreview": false
+            }
         }
     },
     "features": {
@@ -35,6 +95,29 @@
         "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
         "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached"
     ],
+    "forwardPorts": [3306, 6379, 2181, 9092, 4566],
+    "portsAttributes": {
+        "3306": {
+            "label": "MySQL",
+            "onAutoForward": "notify"
+        },
+        "6379": {
+            "label": "Redis",
+            "onAutoForward": "notify"
+        },
+        "2181": {
+            "label": "Zookeeper",
+            "onAutoForward": "notify"
+        },
+        "9092": {
+            "label": "Kafka",
+            "onAutoForward": "notify"
+        },
+        "4566": {
+            "label": "Localstack",
+            "onAutoForward": "notify"
+        }
+    },
     "postCreateCommand": "go mod download && chmod 700 ~/.ssh && chmod 600 ~/.ssh/*",
     "remoteUser": "vscode"
 }

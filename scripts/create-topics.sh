@@ -12,8 +12,8 @@ done
 echo "Creating Kafka topics..."
 
 # Add your topics here
-kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic events --partitions 1 --replication-factor 1
-kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic notifications --partitions 1 --replication-factor 1
+kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic topic1 --partitions 1 --replication-factor 1
+kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic topic2 --partitions 1 --replication-factor 1
 
 echo "Topics created successfully!"
 kafka-topics --bootstrap-server kafka:29092 --list
