@@ -7,8 +7,12 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/irfanputra/devpod-playground/pkg/interfaces"
 	"github.com/joho/godotenv"
 	"github.com/redis/go-redis/v9"
 	"github.com/segmentio/kafka-go"
@@ -16,9 +20,9 @@ import (
 
 // Dependencies represents the dependencies for the application.
 type Dependencies struct {
-	db     *sql.DB
-	rdb    *redis.Client
-	writer *kafka.Writer
+	db     interfaces.DB
+	rdb    interfaces.Redis
+	writer interfaces.KafkaWriter
 }
 
 // NewDependencies creates a new instance of Dependencies.
@@ -105,11 +109,41 @@ func main() {
 	}
 	defer deps.Close()
 
-	// Set up HTTP server
+	// /liveness endpoint for health checks
 	http.HandleFunc("/liveness", livenessHandler)
 
-	fmt.Println("Starting HTTP server on :8080...")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatal("HTTP server error:", err)
+	// Create HTTP server with timeout settings
+	server := &http.Server{
+		Addr:    ":8080",
+		Handler: nil,
 	}
+
+	// Channel to listen for interrupt signals
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+
+	// Start server in a goroutine
+	go func() {
+		fmt.Println("Starting HTTP server on :8080...")
+		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatal("HTTP server error:", err)
+		}
+	}()
+
+	// Wait for interrupt signal
+	<-stop
+	fmt.Println("\nShutting down server...")
+
+	// Create context with timeout for shutdown
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	// Shutdown server
+	if err := server.Shutdown(ctx); err != nil {
+		log.Println("Server shutdown error:", err)
+	}
+
+	// Close dependencies
+	deps.Close()
+	fmt.Println("Server stopped")
 }

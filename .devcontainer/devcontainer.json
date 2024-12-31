@@ -10,17 +10,17 @@
             "extensions": [
                 // Core development
                 "golang.go",
+                "ms-azuretools.vscode-docker",
+                // AI Assistants
+                "continue.continue",
+                "saoudrizwan.claude-dev",
                 "github.copilot",
                 "github.copilot-chat",
-                "ms-azuretools.vscode-docker",
-                
                 // Theme and UI
                 "pkief.material-icon-theme",
                 "jdinhlife.gruvbox",
-                
                 // Git tools
                 "eamodio.gitlens",
-                
                 // Utilities
                 "editorconfig.editorconfig",
                 "redhat.vscode-yaml",
@@ -40,34 +40,31 @@
                     "source.fixAll": true,
                     "source.organizeImports": true
                 },
-
                 // Files settings
                 "files.trimTrailingWhitespace": true,
                 "files.insertFinalNewline": true,
                 "files.eol": "\n",
-
                 // Go settings
                 "go.useLanguageServer": true,
                 "go.toolsManagement.autoUpdate": true,
                 "go.formatTool": "goimports",
                 "go.lintTool": "golangci-lint",
-                "go.lintFlags": ["--fast"],
+                "go.lintFlags": [
+                    "--fast"
+                ],
                 "[go]": {
                     "editor.tabSize": 4,
                     "editor.insertSpaces": false,
                     "editor.formatOnSave": true,
                     "editor.defaultFormatter": "golang.go"
                 },
-
                 // Terminal settings
                 "terminal.integrated.defaultProfile.linux": "zsh",
                 "terminal.integrated.fontFamily": "MesloLGS NF",
-                
                 // Git settings
                 "git.autofetch": true,
                 "git.enableSmartCommit": true,
                 "git.enableCommitSigning": true,
-                
                 // Workbench settings
                 "workbench.iconTheme": "material-icon-theme",
                 "workbench.colorTheme": "Gruvbox Dark Medium",
@@ -95,7 +92,13 @@
         "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
         "source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached"
     ],
-    "forwardPorts": [3306, 6379, 2181, 9092, 4566],
+    "forwardPorts": [
+        3306,
+        6379,
+        2181,
+        9092,
+        4566
+    ],
     "portsAttributes": {
         "3306": {
             "label": "MySQL",
