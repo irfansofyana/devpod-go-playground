@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+
 	"log"
 	"net/http"
 	"os"
@@ -48,6 +49,7 @@ func NewDependencies(mysqlConn string) (*Dependencies, error) {
 	}, nil
 }
 
+// Check checks the health of the dependencies.
 func (d *Dependencies) Check(ctx context.Context) error {
 	// Check MySQL
 	if err := d.db.PingContext(ctx); err != nil {
@@ -90,60 +92,53 @@ func livenessHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "OK")
 }
 
-func main() {
+func init() {
 	// Load environment variables
 	if err := godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
 	}
+}
 
-	// Initialize dependencies
+func main() {
 	mysqlConn := fmt.Sprintf("%s:%s@tcp(mysql:3306)/%s",
 		os.Getenv("MYSQL_USER"),
 		os.Getenv("MYSQL_PASSWORD"),
 		os.Getenv("MYSQL_DATABASE"))
 
-	var err error
-	deps, err = NewDependencies(mysqlConn)
+	deps, err := NewDependencies(mysqlConn)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer deps.Close()
 
-	// /liveness endpoint for health checks
 	http.HandleFunc("/liveness", livenessHandler)
 
-	// Create HTTP server with timeout settings
 	server := &http.Server{
 		Addr:    ":8080",
 		Handler: nil,
 	}
 
-	// Channel to listen for interrupt signals
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
 
-	// Start server in a goroutine
 	go func() {
-		fmt.Println("Starting HTTP server on :8080...")
+		log.Println("Starting HTTP server on :8080...")
 		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			log.Fatal("HTTP server error:", err)
 		}
 	}()
 
-	// Wait for interrupt signal
 	<-stop
-	fmt.Println("\nShutting down server...")
+	log.Println("\nShutting down server...")
 
-	// Create context with timeout for shutdown
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	// Shutdown server
 	if err := server.Shutdown(ctx); err != nil {
 		log.Println("Server shutdown error:", err)
 	}
 
-	// Close dependencies
 	deps.Close()
-	fmt.Println("Server stopped")
+
+	log.Println("Server stopped")
 }

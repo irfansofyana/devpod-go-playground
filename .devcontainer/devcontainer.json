@@ -134,6 +134,6 @@
             "onAutoForward": "notify"
         }
     },
-    "postCreateCommand": "go mod download && chmod 700 ~/.ssh && chmod 600 ~/.ssh/*",
+    "postCreateCommand": "go mod download && chmod 700 ~/.ssh && chmod 600 ~/.ssh/* && sudo chmod 666 /var/run/docker.sock",
     "remoteUser": "vscode"
 }
