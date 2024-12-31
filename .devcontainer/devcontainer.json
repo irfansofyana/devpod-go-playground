@@ -48,12 +48,14 @@
                 // Theme and UI
                 "pkief.material-icon-theme",
                 "jdinhlife.gruvbox",
+                "oderwat.indent-rainbow",
                 // Git tools
                 "eamodio.gitlens",
                 // Utilities
                 "editorconfig.editorconfig",
                 "redhat.vscode-yaml",
-                "mikestead.dotenv"
+                "mikestead.dotenv",
+                "vscodevim.vim"
             ],
             "settings": {
                 // Editor settings
