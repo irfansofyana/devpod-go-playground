@@ -16,14 +16,20 @@ USER vscode
 RUN mkdir -p /home/vscode/.ssh \
     && chmod 700 /home/vscode/.ssh
 
-# Install Oh My Zsh
-RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+# Install Oh My Zsh only if not already installed
+RUN if [ ! -d "$HOME/.oh-my-zsh" ]; then \
+    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; \
+    fi
 
-# Install Zsh plugins
-RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions \
-    && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# Install Zsh plugins if not already installed
+RUN if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then \
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions; \
+    fi && \
+    if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then \
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting; \
+    fi
 
-# Create a custom Zsh configuration
+# Create or update Zsh configuration
 RUN echo 'export ZSH="$HOME/.oh-my-zsh"\n\
 ZSH_THEME="robbyrussell"\n\
 plugins=(git docker docker-compose kubectl golang zsh-autosuggestions zsh-syntax-highlighting)\n\

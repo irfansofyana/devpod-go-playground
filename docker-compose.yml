@@ -68,6 +68,15 @@ services:
     networks:
       - app-network
 
+  kafka-init:
+    build:
+      context: ./scripts
+      dockerfile: kafka-init.Dockerfile
+    depends_on:
+      - kafka
+    networks:
+      - app-network
+
   localstack:
     image: localstack/localstack:2.3
     env_file: .env

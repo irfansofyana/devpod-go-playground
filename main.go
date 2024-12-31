@@ -54,7 +54,7 @@ func main() {
 	// Kafka Connection
 	writer := kafka.NewWriter(kafka.WriterConfig{
 		Brokers: []string{"kafka:29092"},
-		Topic:   "test-topic",
+		Topic:   "events",
 	})
 	defer writer.Close()
 
