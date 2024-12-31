@@ -1,6 +1,8 @@
-# DevPod Go Project with Multiple Services
+# Go DevPod Projects Example
 
-This is a Go project template that demonstrates integration with multiple services:
+This is an example Go project template that demonstrates integration with multiple services utilizing devcontainers and devpod.
+
+The project includes the following services that are common used in a Go project:
 - MySQL 8.0
 - Redis 7.0
 - Kafka (Confluent Platform 7.3.0)
@@ -37,6 +39,11 @@ This is a Go project template that demonstrates integration with multiple servic
    go run main.go
    ```
 
+6. If there is any change, to rebuild the devpod workspace:
+```bash
+devpod up . --recreate
+```
+
 ## Project Structure
 
 - `.devcontainer/` - DevContainer configuration
@@ -53,7 +60,7 @@ This is a Go project template that demonstrates integration with multiple servic
 - Kafka: Running on port 9092 (with Zookeeper on 2181)
 - LocalStack: Running on port 4566 (supports S3, SQS, SNS)
 
-### Monitoring & Management Tools
+### Data Management Tools
 - Adminer (MySQL Management): http://localhost:8080
 - RedisInsight (Redis Management): http://localhost:8001
 - Kafdrop (Kafka Management): http://localhost:9000
@@ -67,16 +74,30 @@ The application provides a health check endpoint at `/liveness` that verifies co
 
 ## Development Environment
 
+The development environment comes batteries included with VS Code and essential plugins for productive Go development:
+
+**Core VS Code Extensions:**
+- Go (official Go language support)
+- Docker (Docker container management)
+- Remote - Containers (DevPod integration)
+- GitLens (enhanced Git capabilities)
+- EditorConfig (consistent editor settings)
+- YAML (YAML file support)
+- Markdown All in One (Markdown editing)
+
+and some others plugins for better development experience.
+
 The development container is configured with:
-- Go 1.21
+- Go 1.23
 - ZSH with Oh My Zsh
-- Git configuration from host
-- SSH configuration from host
+- Git (with configuration from host)
+- SSH (with configuration from host)
 - Docker socket mounted for container management
+- AWS CLI
+- Terraform, Terragrunt, and TFLint
+- Helm, Kubectl, and minikube
+- jq, yq
 
 ## Environment Variables
 
-Key environment variables (configure in .env):
-- MySQL configuration (MYSQL_USER, MYSQL_PASSWORD, etc.)
-- AWS credentials for LocalStack
-- Kafka configuration
+Key environment variables for the application is configured in the `.env` file (please check .eenv.example for reference).
