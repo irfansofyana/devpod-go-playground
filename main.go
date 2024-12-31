@@ -129,7 +129,7 @@ func main() {
 	}()
 
 	<-stop
-	log.Println("\nShutting down server...")
+	log.Println("Shutting down server...")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
