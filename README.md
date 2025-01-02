@@ -74,7 +74,18 @@ The application provides a health check endpoint at `/liveness` that verifies co
 
 ## Development Environment
 
-The development environment comes batteries included with VS Code and essential plugins for productive Go development:
+The development container is configured with:
+- Go 1.23
+- ZSH with Oh My Zsh
+- Git (with configuration from host)
+- SSH (with configuration from host)
+- Docker socket mounted for container management
+- AWS CLI
+- Terraform, Terragrunt, and TFLint
+- Helm, Kubectl, and minikube
+- jq, yq
+
+The development container is also included some VS Code extensions that I usually used.
 
 **Core VS Code Extensions:**
 - Go (official Go language support)
@@ -87,16 +98,6 @@ The development environment comes batteries included with VS Code and essential 
 
 and some others plugins for better development experience.
 
-The development container is configured with:
-- Go 1.23
-- ZSH with Oh My Zsh
-- Git (with configuration from host)
-- SSH (with configuration from host)
-- Docker socket mounted for container management
-- AWS CLI
-- Terraform, Terragrunt, and TFLint
-- Helm, Kubectl, and minikube
-- jq, yq
 
 ## Environment Variables
 
