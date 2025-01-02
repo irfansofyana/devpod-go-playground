@@ -1,4 +1,4 @@
-# Go DevPod Projects Example
+# Go DevPod Example
 
 This is an example Go project template that demonstrates integration with multiple services utilizing devcontainers and devpod.
 
