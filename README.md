@@ -77,8 +77,6 @@ The application provides a health check endpoint at `/liveness` that verifies co
 The development container is configured with:
 - Go 1.23
 - ZSH with Oh My Zsh
-- Git (with configuration from host)
-- SSH (with configuration from host)
 - Docker socket mounted for container management
 - AWS CLI
 - Terraform, Terragrunt, and TFLint
@@ -88,6 +86,7 @@ The development container is configured with:
 The development container is also included some VS Code extensions that I usually used.
 
 **Core VS Code Extensions:**
+
 - Go (official Go language support)
 - Docker (Docker container management)
 - Remote - Containers (DevPod integration)

@@ -20,21 +20,21 @@
             "ppa": false
         },
         // https://github.com/devcontainers/features/tree/main/src/aws-cli
-        //"ghcr.io/devcontainers/features/aws-cli:1": {},
+        "ghcr.io/devcontainers/features/aws-cli:1": {},
         // https://github.com/devcontainers/features/tree/main/src/kubectl-helm-minikube
-        // "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
-            // "version": "latest",
-            // "helm": "latest"
-        // },
+        "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+            "version": "latest",
+            "helm": "latest"
+        },
         // https://github.com/devcontainers/features/tree/main/src/terraform
-        //"ghcr.io/devcontainers/features/terraform:1": {},
+        "ghcr.io/devcontainers/features/terraform:1": {},
         // https://github.com/eitsupi/devcontainer-features/tree/main/src/jq-likes
-        //"ghcr.io/eitsupi/devcontainer-features/jq-likes:2": {
-            // "jqVersion": "latest",
-            // "yqVersion": "latest"
-        // },
+        "ghcr.io/eitsupi/devcontainer-features/jq-likes:2": {
+            "jqVersion": "latest",
+            "yqVersion": "latest"
+        },
         // https://github.com/devcontainers/features/tree/main/src/docker-in-docker
-        //"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
         // https://github.com/devcontainers-extra/features/tree/main/src/zsh-plugins
         "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {
             "plugins": "git docker docker-compose kubectl golang zsh-autosuggestions zsh-syntax-highlighting",
@@ -42,7 +42,7 @@
             "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting"
         },
         // https://github.com/devcontainers-extra/features/tree/main/src/protoc
-       // "ghcr.io/devcontainers-extra/features/protoc:1": {},
+        "ghcr.io/devcontainers-extra/features/protoc:1": {},
         // https://github.com/irfansofyana/devcontainer-features/tree/main/src/kcat-apt
         "ghcr.io/irfansofyana/devcontainer-features/kcat-apt:latest": {}
     },
@@ -116,6 +116,7 @@
             }
         }
     },
+    "mounts": [],
     "forwardPorts": [
         3306,
         6379,
