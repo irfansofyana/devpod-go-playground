@@ -105,11 +105,11 @@ func main() {
 		os.Getenv("MYSQL_PASSWORD"),
 		os.Getenv("MYSQL_DATABASE"))
 
-	deps, err := NewDependencies(mysqlConn)
+	d, err := NewDependencies(mysqlConn)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer deps.Close()
+	deps = d
 
 	http.HandleFunc("/liveness", livenessHandler)
 
