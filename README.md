@@ -88,6 +88,7 @@ The development container is configured with:
 The development container is also included some VS Code extensions that I usually used.
 
 **Core VS Code Extensions:**
+
 - Go (official Go language support)
 - Docker (Docker container management)
 - Remote - Containers (DevPod integration)
