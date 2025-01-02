@@ -42,7 +42,9 @@
             "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting"
         },
         // https://github.com/devcontainers-extra/features/tree/main/src/protoc
-        "ghcr.io/devcontainers-extra/features/protoc:1": {} 
+        "ghcr.io/devcontainers-extra/features/protoc:1": {},
+        // https://github.com/irfansofyana/devcontainer-features/tree/main/src/kcat-apt
+        "ghcr.io/irfansofyana/devcontainer-features/kcat-apt:latest": {}
     },
     "customizations": {
         "vscode": {
