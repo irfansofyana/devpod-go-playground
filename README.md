@@ -100,4 +100,4 @@ The development container is configured with:
 
 ## Environment Variables
 
-Key environment variables for the application is configured in the `.env` file (please check .eenv.example for reference).
+Key environment variables for the application is configured in the `.env` file (please check .env.example for reference).
