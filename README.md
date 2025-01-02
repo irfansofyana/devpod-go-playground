@@ -40,9 +40,9 @@ The project includes the following services that are common used in a Go project
    ```
 
 6. If there is any change, to rebuild the devpod workspace:
-```bash
-devpod up . --recreate
-```
+   ```bash
+   devpod up . --recreate
+   ```
 
 ## Project Structure
 
