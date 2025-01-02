@@ -1,4 +1,4 @@
-# Go DevPod Example
+# Go DevPod Playground
 
 This is an example Go project template that demonstrates integration with multiple services utilizing devcontainers and devpod.
 
