@@ -3,6 +3,7 @@
 This is an example Go project that demonstrates integration with multiple services utilizing devcontainers and devpod.
 
 The project includes the following services that are common used in a Go project:
+
 - MySQL 8.0
 - Redis 7.0
 - Kafka (Confluent Platform 7.3.0)
