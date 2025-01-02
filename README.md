@@ -20,14 +20,17 @@ The project includes the following services that are common used in a Go project
 1. Clone this repository and navigate to the project directory
 
 2. Copy the environment file:
+
    ```bash
    cp .env.example .env
    ```
 
 3. Start DevPod workspace:
+
    ```bash
    devpod up .
    ```
+
    This will:
    - Create a new DevPod workspace
    - Build and start the development container
@@ -36,11 +39,13 @@ The project includes the following services that are common used in a Go project
 4. Open the development container in VS Code.
 
 5. Run the example go application:
+
    ```bash
    go run main.go
    ```
 
 6. If there is any change, to rebuild the devpod workspace:
+
    ```bash
    devpod up . --recreate
    ```
@@ -56,12 +61,14 @@ The project includes the following services that are common used in a Go project
 ## Services
 
 ### Core Services
+
 - MySQL: Running on port 3306
 - Redis: Running on port 6379
 - Kafka: Running on port 9092 (with Zookeeper on 2181)
 - LocalStack: Running on port 4566 (supports S3, SQS, SNS)
 
 ### Data Management Tools
+
 - Adminer (MySQL Management): http://localhost:8080
 - RedisInsight (Redis Management): http://localhost:8001
 - Kafdrop (Kafka Management): http://localhost:9000
@@ -69,6 +76,7 @@ The project includes the following services that are common used in a Go project
 ## Health Check
 
 The application provides a health check endpoint at `/liveness` that verifies connectivity to:
+
 - MySQL database
 - Redis connection
 - Kafka message publishing
@@ -76,6 +84,7 @@ The application provides a health check endpoint at `/liveness` that verifies co
 ## Development Environment
 
 The development container is configured with:
+
 - Go 1.23
 - ZSH with Oh My Zsh
 - Docker socket mounted for container management
@@ -97,7 +106,6 @@ The development container is also included some VS Code extensions that I usuall
 - Markdown All in One (Markdown editing)
 
 and some others plugins for better development experience.
-
 
 ## Environment Variables
 
