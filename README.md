@@ -14,6 +14,7 @@ The project includes the following services that are common used in a Go project
 - DevPod CLI (https://devpod.sh)
 - VS Code with Remote Containers extension
 
+
 ## Getting Started
 
 1. Clone this repository and navigate to the project directory
