@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-
 	"log"
 	"net/http"
 	"os"
@@ -13,17 +12,34 @@ import (
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/irfanputra/devpod-playground/pkg/interfaces"
 	"github.com/joho/godotenv"
 	"github.com/redis/go-redis/v9"
 	"github.com/segmentio/kafka-go"
 )
 
+// DB is an interface for database operations.
+type DB interface {
+	PingContext(ctx context.Context) error
+	Close() error
+}
+
+// Redis is an interface for Redis operations.
+type Redis interface {
+	Ping(ctx context.Context) *redis.StatusCmd
+	Close() error
+}
+
+// KafkaWriter is an interface for Kafka writer operations.
+type KafkaWriter interface {
+	WriteMessages(ctx context.Context, msgs ...kafka.Message) error
+	Close() error
+}
+
 // Dependencies represents the dependencies for the application.
 type Dependencies struct {
-	db     interfaces.DB
-	rdb    interfaces.Redis
-	writer interfaces.KafkaWriter
+	db     DB
+	rdb    Redis
+	writer KafkaWriter
 }
 
 // NewDependencies creates a new instance of Dependencies.

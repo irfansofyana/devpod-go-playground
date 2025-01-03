@@ -6,7 +6,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/irfanputra/devpod-playground/pkg/interfaces"
 	"github.com/redis/go-redis/v9"
 	"github.com/segmentio/kafka-go"
 )
@@ -45,7 +44,7 @@ type mockDB struct {
 	CloseCalled bool
 }
 
-var _ interfaces.DB = (*mockDB)(nil)
+var _ DB = (*mockDB)(nil)
 
 func (m *mockDB) PingContext(ctx context.Context) error {
 	return m.pingErr
@@ -61,7 +60,7 @@ type mockRedis struct {
 	CloseCalled bool
 }
 
-var _ interfaces.Redis = (*mockRedis)(nil)
+var _ Redis = (*mockRedis)(nil)
 
 func (m *mockRedis) Ping(ctx context.Context) *redis.StatusCmd {
 	cmd := redis.NewStatusCmd(ctx, "PING")
@@ -81,7 +80,7 @@ type mockKafkaWriter struct {
 	CloseCalled bool
 }
 
-var _ interfaces.KafkaWriter = (*mockKafkaWriter)(nil)
+var _ KafkaWriter = (*mockKafkaWriter)(nil)
 
 func (m *mockKafkaWriter) WriteMessages(ctx context.Context, msgs ...kafka.Message) error {
 	return m.writeErr
